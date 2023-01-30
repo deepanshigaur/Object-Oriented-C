@@ -18,33 +18,34 @@ line line_create(float slope,float y_intercept) {
 }
 
 line line_from_coords(coord from,coord to) {
-	return NULL; // Replace this with code to create a enw line "object" and return a pointer to that object
+	//return NULL; // Replace this with code to create a enw line "object" and return a pointer to that object
 	// The returned line should go through both the from and to coordinates specified in the argument
 	// Return NULL if both from and to have the same x coordinate (which would make the slope infinity)
 	//if (from->x == to->x) {
 		if (coord_getx(from) == coord_getx(to)){
         return NULL;
     }
-    struct line* newline = (struct line*)malloc(sizeof(struct_line));
-    newline->slope = (to.y - from.y) / (to.x - from.x);
-    newline->y_intercept = from.y - (newline->slope * from.x);
+    line newline  = malloc(sizeof(line));
+    newline->slope = (coord_gety(to) - coord_gety(from)) / (coord_getx(to) - coord_getx(from));
+    newline->y_intercept = coord_gety(from) - (newline->slope * coord_getx(from));
     return newline;
 }
 
 coord line_intersect(line l1,line l2) {
-	return NULL; // Replace with code to return a new coordinate where lines l1 and l2 intersect
+	//return NULL; // Replace with code to return a new coordinate where lines l1 and l2 intersect
 	// Return NULL if lines l1 and l2 have the same slope. They are parallel and never intersect
 	 if (l1->slope == l2->slope) {
         return NULL;
     }
-    struct Coordinate* newCoord = (struct Coordinate*)malloc(sizeof(struct Coordinate));
-    newCoord->x = (l2->y_intercept - l1->y_intercept) / (l1->slope - l2->slope);
-    newCoord->y = (l1->slope * newCoord->x) + l1->y_intercept;
+    coord newCoord;
+    float x = (l2->y_intercept - l1->y_intercept) / (l1->slope - l2->slope);
+    float y = (l1->slope * x) + l1->y_intercept;
+    newCoord = coord_create(x,y);
     return newCoord;
 }
 
 char * line_format(line ln) {
-	return ""; // Replace with code to return the pointer to a string that contains the formatted description of a line.
+	//return ""; // Replace with code to return the pointer to a string that contains the formatted description of a line.
 	// If ln is NULL, return "NULL"
 	// The result should be in the form: "y = <m>x + <b>", 
 	// where <m> and <b> are replaced by the floating point representation (%f)
