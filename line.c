@@ -21,10 +21,11 @@ line line_from_coords(coord from,coord to) {
 	return NULL; // Replace this with code to create a enw line "object" and return a pointer to that object
 	// The returned line should go through both the from and to coordinates specified in the argument
 	// Return NULL if both from and to have the same x coordinate (which would make the slope infinity)
-	if (from->x == to->x) {
+	//if (from->x == to->x) {
+		if (coord_getx(from) == coord_getx(to)){
         return NULL;
     }
-    struct line* newline = (struct line*)malloc(sizeof(struct line));
+    struct line* newline = (struct line*)malloc(sizeof(struct_line));
     newline->slope = (to.y - from.y) / (to.x - from.x);
     newline->y_intercept = from.y - (newline->slope * from.x);
     return newline;
